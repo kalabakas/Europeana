@@ -11,14 +11,15 @@ class WebResourceEdmRights extends ObjectAbstract {
 	 */
 	public $def;
 
-	public function init() {
-		parent::init();
-		$this->def = array();
-	}
 
 	public function __construct( array $properties ) {
 		$this->init();
-		$this->populate( $properties );
+		$this->populateObject( $properties );
+	}
+
+	public function init() {
+		parent::init();
+		$this->def = array();
 	}
 
 }

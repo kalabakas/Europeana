@@ -57,13 +57,23 @@ class Login extends Request {
 
 		if ( isset( $options['j_username'] ) ) {
 			$this->j_username = $options['j_username'];
-		} else {
-			throw new Exception( __METHOD__ . ' no j_username provided', 2 );
 		}
 
 		if ( isset( $options['j_password'] ) ) {
 			$this->j_password = $options['j_password'];
-		} else {
+		}
+
+		$this->validate();
+	}
+
+	public function validate() {
+		parent::validate();
+
+		if ( empty( $this->j_username ) ) {
+			throw new Exception( __METHOD__ . ' no j_password provided', 2 );
+		}
+
+		if ( empty( $this->j_password ) ) {
 			throw new Exception( __METHOD__ . ' no j_password provided', 2 );
 		}
 	}

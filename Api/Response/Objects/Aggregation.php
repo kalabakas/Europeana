@@ -15,12 +15,10 @@ class Aggregation extends ObjectAbstract {
 	 */
 	public $about;
 
-
 	/**
 	 * @var string
 	 */
 	public $aggregatedCHO;
-
 
 	/**
 	 * @var array
@@ -28,24 +26,20 @@ class Aggregation extends ObjectAbstract {
 	 */
 	public $edmDataProvider;
 
-
 	/**
 	 * @var string
 	 */
 	public $edmIsShownAt;
-
 
 	/**
 	 * @var string
 	 */
 	public $edmIsShownBy;
 
-
 	/**
 	 * @var string
 	 */
 	public $edmObject;
-
 
 	/**
 	 * @var string
@@ -53,19 +47,16 @@ class Aggregation extends ObjectAbstract {
 	 */
 	public $edmProvider;
 
-
 	/**
 	 * @var string
 	 * a collection of edmRights definitions
 	 */
 	public $edmRights;
 
-
 	/**
 	 * @var string
 	 */
 	public $hasView;
-
 
 	/**
 	 * @var string
@@ -73,9 +64,10 @@ class Aggregation extends ObjectAbstract {
 	 */
 	public $webResources;
 
+
 	public function __construct( array $properties ) {
 		$this->init();
-		$this->populate( $properties );
+		$this->populateObject( $properties );
 	}
 
 	public function init() {

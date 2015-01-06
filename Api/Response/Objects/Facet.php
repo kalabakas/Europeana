@@ -20,17 +20,16 @@ class Facet extends ObjectAbstract {
 	 */
 	public $name;
 
+
 	public function __construct( array $properties ) {
 		$this->init();
-		$this->populate( $properties );
+		$this->populateObject( $properties );
 	}
 
 	public function init() {
 		parent::init();
-
 		$this->fields = array();
 		$this->name = null;
-
 		$this->_property_to_class['fields'] = 'Europeana\Api\Response\Objects\FacetField';
 	}
 

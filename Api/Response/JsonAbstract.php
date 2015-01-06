@@ -1,63 +1,17 @@
 <?php
 namespace Europeana\Api\Response;
-use Europeana\Api\Helpers\Response as Response_Helper;
-use Exception;
 
 
 abstract class JsonAbstract extends ObjectAbstract {
 
 	/**
-	 * @var {array}
-	 */
-	public $http_info;
-
-	/**
-	 * @var {string}
-	 */
-	public $message_body;
-
-	/**
-	 * @var {\W3CHttp\Response}
-	 */
-	public $Response;
-
-	/**
-	 * @var {string}
-	 */
-	public $wskey;
-
-	/**
-	 * @param {array} $response
+	 * @param {\W3C\Http\Response} $Response
 	 * @param {string} $wskey
 	 */
-	public function __construct( \W3C\Http\Response $Response, $wskey = '' ) {
+	public function __construct( $Response, $wskey = '' ) {
 		$this->init();
-
-		if ( empty( $Response ) ) {
-			throw new Exception( 'no Response provided' );
-		}
-
-		$this->Response = $Response;
-		$this->wskey = $wskey;
-
-		$this->http_info = $Response->getHttpInfo();
-		$this->message_body = $Response->getMessageBody();
-
-		if ( !empty( $wskey ) ) {
-			if ( isset( $this->http_info['url'] ) ) {
-				$this->http_info['url'] = Response_Helper::obfuscateApiKey( $this->http_info['url'], $wskey );
-			}
-
-			if ( isset( $this->http_info['request_header'] ) ) {
-				$this->http_info['request_header'] = Response_Helper::obfuscateApiKey( $this->http_info['request_header'], $wskey );
-			}
-
-			$this->message_body = Response_Helper::obfuscateApiKey( $this->message_body, $wskey );
-		}
-
-		if ( $this->http_info['http_code'] !== 200 ) {
-			$this->throwRequestError();
-		}
+		$this->populate( $Response, $wskey );
+		$this->obfuscateApiKey();
 
 		$this->response_array = json_decode( $this->message_body, true );
 
@@ -71,7 +25,7 @@ abstract class JsonAbstract extends ObjectAbstract {
 			'success' => isset( $this->response_array['success'] ) ? $this->response_array['success'] : false
 		);
 
-		$this->populate( $this->response_array );
+		$this->populateObject( $this->response_array );
 	}
 
 	public function getResponseAsJson() {
@@ -142,41 +96,21 @@ abstract class JsonAbstract extends ObjectAbstract {
 		return $result;
 	}
 
-	/**
-	 * @return void
-	 */
 	public function init() {
 		parent::init();
-		$this->Response = null;
-		$this->http_info = array();
-		$this->message_body = '';
-		$this->wskey = '';
-
-		$this->_http_status_code_to_error = array(
-			200 => 'The request was executed successfully',
-			400 => 'The request sent by the client was syntactically incorrect',
-			401 => 'Service was called with invalid argument(s); check the call URL',
-			404 => 'The requested resource is not available',
-			429 => 'The request could be served because the application has reached its usage limit',
-			500 => 'Internal Server Error. Something has gone wrong, please report to us'
-		);
 	}
 
 	/**
-	 * @throws Exception
+	 * @param {\W3C\Http\Response} $Response
+	 * @param {string} $wskey
 	 */
-	protected function throwRequestError() {
-		$msg = 'API call error : ';
+	protected function populate( $Response, $wskey = '' ) {
+		parent::populate( $Response, $wskey );
+		$this->validate();
+	}
 
-		if ( array_key_exists( $this->http_info['http_code'], $this->_http_status_code_to_error ) ) {
-			$msg .= $this->_http_status_code_to_error[ $this->http_info['http_code'] ];
-		} else {
-			$msg .= 'the API returned an http status code that’s not officially handled by the API - ' . $this->http_info['http_code'];
-		}
-
-		$msg .= PHP_EOL . 'API call info  : ' . PHP_EOL;
-		$msg .= print_r( $this->http_info, true );
-		throw new Exception( $msg );
+	public function validate() {
+		parent::validate();
 	}
 
 }

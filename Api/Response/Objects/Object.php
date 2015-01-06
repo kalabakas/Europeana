@@ -74,9 +74,10 @@ class Object extends ObjectAbstract {
 	 */
 	public $type;
 
+
 	public function __construct( array $properties ) {
 		$this->init();
-		$this->populate( $properties );
+		$this->populateObject( $properties );
 	}
 
 	public function init() {

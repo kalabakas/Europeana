@@ -22,9 +22,10 @@ class WebResources extends ObjectAbstract {
 	 */
 	public $webResourceEdmRights;
 
+
 	public function __construct( array $properties ) {
 		$this->init();
-		$this->populate( $properties );
+		$this->populateObject( $properties );
 	}
 
 	public function init() {

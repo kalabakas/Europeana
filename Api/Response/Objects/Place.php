@@ -40,14 +40,14 @@ class Place extends ObjectAbstract {
 	 */
 	public $altitude;
 
+
 	public function __construct( array $properties ) {
 		$this->init();
-		$this->populate( $properties );
+		$this->populateObject( $properties );
 	}
 
 	public function init() {
 		parent::init();
-
 		$this->about = null;
 		$this->altitude = 0;
 		$this->altLabel = array();

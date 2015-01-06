@@ -20,14 +20,14 @@ class FacetField extends ObjectAbstract {
 	 */
 	public $label;
 
+
 	public function __construct( array $properties ) {
 		$this->init();
-		$this->populate( $properties );
+		$this->populateObject( $properties );
 	}
 
 	public function init() {
 		parent::init();
-
 		$this->count = 0;
 		$this->label = null;
 	}

@@ -43,9 +43,14 @@ class Proxy extends ObjectAbstract {
 	 */
 	public $europeanaProxy;
 
+
+	public function __construct( array $properties ) {
+		$this->init();
+		$this->populateObject( $properties );
+	}
+
 	public function init() {
 		parent::init();
-
 		$this->about = null;
 		$this->dcCoverage = array();
 		$this->dcCreator = array();
@@ -54,11 +59,6 @@ class Proxy extends ObjectAbstract {
 		$this->proxyFor = null;
 		$this->edmType = null;
 		$this->europeanaProxy = null;
-	}
-
-	public function __construct( array $properties ) {
-		$this->init();
-		$this->populate( $properties );
 
 		$this->_property_to_class['dcCoverage'] = 'Europeana\Api\Response\Objects\DcCoverage';
 		$this->_property_to_class['dcCreator'] = 'Europeana\Api\Response\Objects\DcCreator';

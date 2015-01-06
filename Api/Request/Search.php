@@ -1,6 +1,6 @@
 <?php
 namespace Europeana\Api\Request;
-use Exception;
+use Php\Exception;
 use W3C\Http\Request;
 
 
@@ -68,7 +68,7 @@ class Search extends Request {
 	/**
 	 * @var {string}
 	 */
-	protected $original_qf;
+	protected $endpoint;
 
 
 	protected function buildQueryParams() {
@@ -139,6 +139,13 @@ class Search extends Request {
 	}
 
 	/**
+	 * @return {string}
+	 */
+	public function getEndpoint() {
+		return $this->endpoint;
+	}
+
+	/**
 	 * @param {array} $options
 	 */
 	protected function populate( $options = array() ) {
@@ -159,6 +166,12 @@ class Search extends Request {
 		if ( isset( $options['wskey'] ) ) {
 			$this->wskey = $options['wskey'];
 		}
+
+		$this->validate();
+	}
+
+	public function validate() {
+		parent::validate();
 	}
 
 }

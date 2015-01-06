@@ -100,14 +100,14 @@ class Item extends ObjectAbstract {
 	 */
 	public $year;
 
+
 	public function __construct( array $properties ) {
 		$this->init();
-		$this->populate( $properties );
+		$this->populateObject( $properties );
 	}
 
 	public function init() {
 		parent::init();
-
 		$this->completeness = 0;
 		$this->dataProvider = array();
 		$this->dcCreator = array();

@@ -1,11 +1,11 @@
 <?php
 namespace	Europeana\Api\Response;
-use Exception;
+use Php\Exception;
 use ReflectionClass;
 use ReflectionProperty;
 
 
-abstract class ObjectAbstract {
+abstract class ObjectAbstract extends ResponseAbstract {
 
 	/**
 	 * @var array
@@ -20,7 +20,7 @@ abstract class ObjectAbstract {
 	 */
 	protected function addObject( array $properties, $property_name = null ) {
 		if ( empty( $property_name ) ) {
-			throw new Exception('no property name provided');
+			throw new Exception( 'no property name provided' );
 		}
 
 		if ( is_array( $properties[ $property_name ] ) ) {
@@ -38,6 +38,7 @@ abstract class ObjectAbstract {
 	}
 
 	public function init() {
+		parent::init();
 		$this->_reflection = new ReflectionClass( $this );
 		$this->_property_to_class = array();
 		$this->_public_properties = $this->_reflection->getProperties( ReflectionProperty::IS_PUBLIC );
@@ -46,7 +47,7 @@ abstract class ObjectAbstract {
 	/**
 	 * @return void
 	 */
-	protected function populate( array &$properties ) {
+	protected function populateObject( array $properties ) {
 		if ( empty( $properties ) ) {
 			return;
 		}

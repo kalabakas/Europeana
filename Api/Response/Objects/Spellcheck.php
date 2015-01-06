@@ -20,14 +20,14 @@ class Spellcheck extends ObjectAbstract {
 	 */
 	public $suggestions;
 
+
 	public function __construct( array $properties ) {
 		$this->init();
-		$this->populate( $properties );
+		$this->populateObject( $properties );
 	}
 
 	public function init() {
 		parent::init();
-
 		$this->correctlySpelled = false;
 		$this->suggestions = array();
 	}

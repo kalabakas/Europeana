@@ -23,14 +23,14 @@ class Suggestion extends ObjectAbstract {
 	 */
 	public $field;
 
+
 	public function __construct( array $properties ) {
 		$this->init();
-		$this->populate( $properties );
+		$this->populateObject( $properties );
 	}
 
 	public function init() {
 		parent::init();
-
 		$this->term = null;
 		$this->frequency = 0;
 		$this->field = null;

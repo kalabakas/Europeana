@@ -40,17 +40,14 @@ class ApiResponse extends ObjectAbstract {
 	 */
 	public $success;
 
+
 	public function __construct( array $properties ) {
 		$this->init();
-		$this->populate( $properties );
+		$this->populateObject( $properties );
 	}
 
-	/**
-	 * @return void
-	 */
 	public function init() {
 		parent::init();
-
 		$this->action = null;
 		$this->apikey = null;
 		$this->error = null;

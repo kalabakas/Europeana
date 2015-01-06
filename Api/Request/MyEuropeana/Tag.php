@@ -22,6 +22,12 @@ class Tag extends Request {
 
 
 	/**
+	 * @var {string}
+	 */
+	protected $endpoint;
+
+
+	/**
 	 * @param {object|array|string} $data
 	 * data to send in the call
 	 *
@@ -49,6 +55,13 @@ class Tag extends Request {
 	}
 
 	/**
+	 * @return {string}
+	 */
+	public function getEndpoint() {
+		return $this->endpoint;
+	}
+
+	/**
 	 * @param {array} $options
 	 */
 	protected function populate( $options = array() ) {
@@ -61,6 +74,12 @@ class Tag extends Request {
 		if ( isset( $options['tag'] ) ) {
 			$this->tag = $options['tag'];
 		}
+
+		$this->validate();
+	}
+
+	public function validate() {
+		parent::validate();
 	}
 
 }

@@ -56,12 +56,11 @@ class Tag extends ObjectAbstract {
 
 	public function __construct( array $properties ) {
 		$this->init();
-		$this->populate( $properties );
+		$this->populateObject( $properties );
 	}
 
 	public function init() {
 		parent::init();
-
 		$this->id = 0;
 		$this->europeanaId = '';
 		$this->guid = '';
