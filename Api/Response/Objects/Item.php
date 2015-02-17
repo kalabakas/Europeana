@@ -109,6 +109,11 @@ class Item extends ObjectAbstract {
     /**
      * @var array
      */
+    public $edmConceptPrefLabelLangAware;
+
+    /**
+     * @var array
+     */
     public $dcDescription;
 
     /**
@@ -152,6 +157,7 @@ class Item extends ObjectAbstract {
         $this->title = array();
         $this->type = null;
         $this->year = 0;
+        $this->edmConceptPrefLabelLangAware = array();
         $this->dcDescription = array();
         $this->edmIsShownBy = array();
         $this->edmIsShownAt = array();
